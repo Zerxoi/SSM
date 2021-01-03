@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="userService" class="xyz.zerxoi.service.impl.UserServiceImpl">
+        <!-- 将 userDao 注入到 userService 的 userDao 属性中
+                name：对象的属性名
+                ref：Spring 创建的对象的 id 属性
+         -->
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    <bean id="userDao" class="xyz.zerxoi.dao.impl.UserDaoImpl">
+
+    </bean>
+</beans>

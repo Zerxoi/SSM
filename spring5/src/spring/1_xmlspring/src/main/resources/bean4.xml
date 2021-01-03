@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="iterable" class="xyz.zerxoi.pojo.MyIterable">
+        <property name="array">
+            <list>
+                <ref bean="accouting" />
+                <ref bean="sales" />
+            </list>
+        </property>
+        <property name="list">
+            <list>
+                <ref bean="accouting" />
+                <ref bean="sales" />
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="wdnmd" value-ref="accouting"></entry>
+                <entry key="yyds" value-ref="sales"></entry>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <ref bean="accouting" />
+                <ref bean="sales" />
+            </set>
+        </property>
+    </bean>
+    <bean id="accouting" class="xyz.zerxoi.pojo.Dept">
+        <property name="name" value="accouting"></property>
+    </bean>
+    <bean id="sales" class="xyz.zerxoi.pojo.Dept">
+        <property name="name" value="sales"></property>
+    </bean>
+</beans>

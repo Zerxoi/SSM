@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 通过设置 bean 标签的 scope 属性来设置对象是单例对象还是多例对象 -->
+    <!-- scope 属性有两个可选的值，分别是 singleton(默认值) 和 prototype -->
+    <!-- 单实例对象 -->
+    <bean id="bean1" class="xyz.zerxoi.pojo.MyBean" scope="singleton" ></bean>
+    <!-- 多实例对象 -->
+    <bean id="bean2" class="xyz.zerxoi.pojo.MyBean" scope="prototype"></bean>
+</beans>

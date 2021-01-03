@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 开启组件扫描 -->
+    <!-- 多个包使用逗号 (,) 隔开 -->
+    <context:component-scan base-package="xyz.zerxoi"></context:component-scan>
+
+    <!-- 不适用默认过滤器 -->
+    <!-- 使用自定义的过滤器，该过滤器只会扫描带有 @Service 注解的类  -->
+    <!-- <context:component-scan base-package="xyz.zerxoi" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+    </context:component-scan> -->
+
+    <!-- 使用默认的过滤器 -->
+    <!-- 会设定过滤器不扫描带有 @Service 注释的类  -->
+    <!-- <context:component-scan base-package="xyz.zerxoi">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan> -->
+</beans>

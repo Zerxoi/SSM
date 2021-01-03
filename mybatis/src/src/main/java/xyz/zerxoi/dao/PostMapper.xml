@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.zerxoi.dao.PostMapper">
+    <select id="selectPosts" resultType="xyz.zerxoi.pojo.Post">
+        select * from t_post
+    </select>
+    <select id="selectPostById" resultType="xyz.zerxoi.pojo.Post">
+        select * from t_post where id = #{id}
+    </select>
+    <resultMap id="detailedPostResultMap" type="xyz.zerxoi.pojo.DetailedPost">
+        <constructor>
+            <idArg column="post_id" javaType="int" />
+        </constructor>
+        <result property="created_on" column="post_created_on" />
+        <result property="body" column="post_body" />
+        <association property="author" javaType="xyz.zerxoi.pojo.Author">
+            <id property="id" column="author_id" />
+            <result property="username" column="author_username" />
+            <result property="password" column="author_password" />
+            <result property="email" column="author_email" />
+            <result property="interests" column="author_interests" />
+        </association>
+        <collection property="comments" ofType="xyz.zerxoi.pojo.Comment">
+            <id property="id" column="comment_id" />
+            <result property="author_id" column="comment_author_id" />
+            <result property="post_id" column="comment_post_id" />
+            <result property="text" column="comment_text" />
+        </collection>
+    </resultMap>
+    <select id="selectDetailedPost" resultMap="detailedPostResultMap">
+        select
+            P.id as post_id,
+            P.created_on as post_created_on,
+            P.body as post_body,
+            A.id as author_id,
+            A.username as author_username,
+            A.password as author_password,
+            A.email as author_email,
+            A.interests as author_interests,
+            C.id as comment_id,
+            C.author_id as comment_author_id,
+            C.post_id as comment_post_id,
+            C.text as comment_text
+        from t_post P
+            left outer join t_author A on P.author_id = A.id
+            left outer join t_comment C on P.id = C.post_id
+        where P.id = #{id}
+    </select>
+
+    <resultMap id="postAuthorComments" type="xyz.zerxoi.pojo.DetailedPost">
+        <constructor>
+            <idArg column="id" javaType="int" />
+        </constructor>
+        <result property="created_on" column="post_created_on" />
+        <result property="body" column="body" />
+        <association property="author" javaType="xyz.zerxoi.pojo.Author" resultSet="author" column="author_id" foreignColumn="id">
+            <id property="id" column="id" />
+            <result property="username" column="username" />
+            <result property="password" column="password" />
+            <result property="email" column="email" />
+            <result property="interests" column="interests" />
+        </association>
+        <collection property="comments" ofType="xyz.zerxoi.pojo.Comment" resultSet="comments" column="id" foreignColumn="post_id">
+            <id property="id" column="id" />
+            <result property="author_id" column="author_id" />
+            <result property="post_id" column="post_id" />
+            <result property="text" column="text" />
+        </collection>
+    </resultMap>
+    <select id="selectDetailedPostBySP" resultSets="post,author,comments" resultMap="postAuthorComments">
+        call selectPostAuthorCommentsById(#{id})
+    </select>
+</mapper>

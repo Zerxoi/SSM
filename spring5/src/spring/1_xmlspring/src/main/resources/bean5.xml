@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <bean id="accouting" class="xyz.zerxoi.pojo.Dept">
+        <property name="name" value="accouting"></property>
+    </bean>
+    <bean id="sales" class="xyz.zerxoi.pojo.Dept">
+        <property name="name" value="sales"></property>
+    </bean>
+    <util:list id="deptList">
+        <ref bean="accouting" />
+        <ref bean="sales" />
+    </util:list>
+
+    <bean id="iterable" class="xyz.zerxoi.pojo.MyIterable">
+        <property name="array">
+            <array>
+                <ref bean="accouting" />
+                <ref bean="sales" />
+            </array>
+        </property>
+        <property name="list" ref="deptList"></property>
+        <property name="map">
+            <map>
+                <entry key="wdnmd" value-ref="accouting"></entry>
+                <entry key="yyds" value-ref="sales"></entry>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <ref bean="accouting" />
+                <ref bean="sales" />
+            </set>
+        </property>
+    </bean>
+</beans>

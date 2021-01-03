@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="emp" class="xyz.zerxoi.pojo.Emp" autowire="byType">
+        <property name="name" value="zerxoi"></property>
+    </bean>
+    <bean id="dept" class="xyz.zerxoi.pojo.Dept">
+        <property name="name" value="Sales"></property>
+    </bean>
+</beans>

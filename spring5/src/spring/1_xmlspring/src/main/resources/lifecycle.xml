@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- <bean id="dept" class="xyz.zerxoi.pojo.Dept">
+        <property name="name" value="Sales"></property>
+    </bean>
+    <bean id="emp" class="xyz.zerxoi.pojo.Emp">
+        <property name="name">
+            <value>赵日天</value>
+        </property>
+        <property name="salary">
+            <value>1900</value>
+        </property>
+        <property name="dept">
+            <ref bean="dept" />
+        </property>
+    </bean> -->
+    <bean id="lifecycle" class="xyz.zerxoi.pojo.LifeCycle" init-method="initMethod" destroy-method="destroyMethod">
+        <property name="foo">
+            <value>bar</value>
+        </property>
+    </bean>
+    <!-- 配置并创建后期处理器（该类实现 BeanPostProcessor 接口） -->
+    <!-- 后期处理器会对当前配置文件的所有 Bean 都添加都只处理器的处理 -->
+    <bean id="myBeanPostProcessor" class="xyz.zerxoi.pojo.MyBeanPostProcessor"></bean>
+</beans>

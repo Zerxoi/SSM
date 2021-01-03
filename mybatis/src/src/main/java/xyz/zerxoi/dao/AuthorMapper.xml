@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.zerxoi.dao.AuthorMapper">
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+    <resultMap id="author" type="xyz.zerxoi.pojo.Author">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="email" column="email" />
+        <result property="interests" column="interests" />
+    </resultMap>
+    <select id="selectAuthors" resultType="author">
+        select * from t_author
+    </select>
+    <select id="selectAuthorById" resultType="author">
+        select * from t_author where id = #{id}
+    </select>
+    <resultMap id="authorMap" type="Map">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="email" column="email" />
+        <result property="interests" column="interests" javaType="List" />
+    </resultMap>
+    <select id="selectAuthorMapById" resultMap="authorMap">
+        select * from t_author where id = #{id}
+    </select>
+    <select id="selectAuthorMaps" resultMap="author">
+        select * from t_author
+    </select>
+    <select id="selectAuthorCursor" resultMap="author">
+        select * from t_author
+    </select>
+    <select id="selectAuthorCursorById" resultMap="author">
+        select * from t_author where id = #{id}
+    </select>
+    <insert id="insertAuthor" useGeneratedKeys="true" keyProperty="id">
+        insert into t_author (`username`, `password`, `email`, `interests`) values (#{username}, #{password}, #{email}, #{interests,javaType=List})
+    </insert>
+    <insert id="insertAuthors" useGeneratedKeys="true" keyProperty="id">
+        insert
+            into t_author (`username`, `password`, `email`, `interests`)
+        values
+        <foreach collection="authors" item="author" separator=",">
+            (#{author.username}, #{author.password}, #{author.email}, #{author.interests,javaType=List})
+        </foreach>
+    </insert>
+
+    <update id="updateAuthor">
+        update 
+            t_author
+        set
+            username = #{username}, password = #{password}, email = #{email}, interests = #{interests,javaType=List}
+        where
+            id = #{id}
+    </update>
+    <update id="updateAuthors">
+        update t_author
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="username = case" suffix="end,">
+                <foreach collection="authors" item="author">
+                    when id = #{author.id} then #{author.username}
+                </foreach>
+            </trim>
+            <trim prefix="password = case" suffix="end,">
+                <foreach collection="authors" item="author">
+                    when id = #{author.id} then #{author.password}
+                </foreach>
+            </trim>
+            <trim prefix="email = case" suffix="end,">
+                <foreach collection="authors" item="author">
+                    when id = #{author.id} then #{author.email}
+                </foreach>
+            </trim>
+            <trim prefix="interests = case" suffix="end,">
+                <foreach collection="authors" item="author">
+                    when id = #{author.id} then #{author.interests,javaType=List}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="authors" item="author" open="(" close=")" separator=",">
+            #{author.id}
+        </foreach>
+    </update>
+    <delete id="deleteAuthor">
+        delete from t_author where id = #{id}
+    </delete>
+    <delete id="deleteAuthors">
+        delete from t_author where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectAuthorsBy" resultType="xyz.zerxoi.pojo.Author">
+        select * from t_author
+        <trim prefix="where" prefixOverrides="and |or " suffixOverrides=" and| or">
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="interests != null">
+                and interests = #{interests,javaType=List}
+            </if>
+        </trim>
+    </select>
+    <select id="selectAuthorsByIds">
+        select * from t_author where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

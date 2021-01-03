@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- <configuration> 根元素 -->
+
+<configuration>
+  <properties resource="config.properties">
+    <property name="username" value="root" />
+    <property name="password" value="6019" />
+  </properties>
+
+  <settings>
+    <!-- <setting name="cacheEnabled" value="true" /> -->
+    <setting name="logImpl" value="LOG4J" />
+  </settings>
+
+  <typeAliases>
+    <typeAlias alias="Author" type="xyz.zerxoi.pojo.Author" />
+    <typeAlias alias="Comment" type="xyz.zerxoi.pojo.Comment" />
+    <typeAlias alias="Post" type="xyz.zerxoi.pojo.Post" />
+  </typeAliases>
+  
+  <typeHandlers>
+    <!-- <typeHandler handler="xyz.zerxoi.typehandler.StringArrayTypeHandler" javaType="[Ljava.lang.String;" jdbcType="VARCHAR" />
+    <typeHandler handler="xyz.zerxoi.typehandler.SATH" javaType="[Ljava.lang.String;" />
+     -->
+     <!-- <typeHandler handler="xyz.zerxoi.typehandler.StringListTypeHandler" /> -->
+     <!-- <typeHandler handler="xyz.zerxoi.typehandler.StringArray" /> -->
+     <typeHandler handler="xyz.zerxoi.typehandler.StringListBaseTypeHandler" />
+    <!-- <package name="xyz.zerxoi.typehandler" /> -->
+
+  </typeHandlers>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC" />
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="xyz/zerxoi/dao/PostMapper.xml" />
+    <mapper resource="xyz/zerxoi/dao/AuthorMapper.xml" />
+    <!-- <mapper class="xyz.zerxoi.dao.PostMapper" /> -->
+  </mappers>
+</configuration>
