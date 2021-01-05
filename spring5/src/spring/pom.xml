@@ -87,7 +87,7 @@
   </build>
 
   <modules>
-    <module>1_xmlspring</module>
-    <module>2_annotationspring</module>
+    <module>xml-bean</module>
+    <module>annotation-bean</module>
   </modules>
 </project>
