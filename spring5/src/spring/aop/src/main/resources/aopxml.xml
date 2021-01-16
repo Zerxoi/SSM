@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 被增强对象 -->
+    <bean id="book" class="xyz.zerxoi.xml.Book"></bean>
+    <!-- 切面对象 -->
+    <bean id="bookProxy" class="xyz.zerxoi.xml.BookProxy"></bean>
+    <!-- AOP 配置 -->
+    <aop:config>
+        <!-- 切入点配置 -->
+        <aop:pointcut id="p" expression="execution(* xyz.zerxoi.xml.Book.*(..)) and args(author, name, price)" />
+        <!-- 切面配置 -->
+        <!-- ref 是切面 Bean 对象的引用 -->
+        <aop:aspect ref="bookProxy">
+            <!-- 通知配置 -->
+            <!-- 后置通知将切面的 before 方法作用在 切入点 p 上 -->
+            <aop:before method="before" pointcut-ref="p" arg-names="name, author, price"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

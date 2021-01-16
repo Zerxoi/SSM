@@ -32,6 +32,12 @@ CREATE TABLE `t_comment` (
         REFERENCES `t_author` (`id`)
 )  ENGINE=INNODB CHARACTER SET=UTF8MB4;
 
+CREATE TABLE `t_account` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(32),
+    `balance` INT
+)  ENGINE=INNODB CHARACTER SET=UTF8MB4;
+
 INSERT INTO `t_author` (`id`, `username`, `password`, `email`, `interests`) VALUES ('1', 'zerxoi', '123456', 'zerxoi@163.com', 'java,js');
 INSERT INTO `t_author` (`id`, `username`, `password`, `email`, `interests`) VALUES ('2', 'kaguya', '654321', 'kaguya@gmail.com', 'cpp,python,golang');
 
@@ -43,6 +49,10 @@ INSERT INTO `t_comment` (`id`, `author_id`, `post_id`, `text`) VALUES ('2', '2',
 INSERT INTO `t_comment` (`id`, `author_id`, `post_id`, `text`) VALUES ('3', '1', '1', 'Yes');
 INSERT INTO `t_comment` (`id`, `author_id`, `post_id`, `text`) VALUES ('4', '1', '2', 'FML');
 INSERT INTO `t_comment` (`id`, `author_id`, `post_id`, `text`) VALUES ('5', '2', '2', '发霉啦');
+
+INSERT INTO `t_account` (`name`, `balance`) VALUES ('alice', 1200);
+INSERT INTO `t_account` (`name`, `balance`) VALUES ('bob', 500);
+INSERT INTO `t_account` (`name`, `balance`) VALUES ('chris', 900);
 
 delimiter //
 
