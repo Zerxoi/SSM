@@ -14,7 +14,7 @@ import xyz.zerxoi.service.AuthorService;
 public class JdbcTemplateTest {
     @Test
     public void insertAuthorTest() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bean1.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("jdbctemplate.xml");
         AuthorService bean = context.getBean("authorServiceImpl", AuthorService.class);
         Author author = new Author();
         author.setUsername("动漫高手");
@@ -29,7 +29,7 @@ public class JdbcTemplateTest {
 
     @Test
     public void queryAuthorTest() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bean1.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("jdbctemplate.xml");
         AuthorDao bean = context.getBean("authorDaoImpl", AuthorDao.class);
         System.out.println(bean.selectAuthor(1));
         context.close();
@@ -37,7 +37,7 @@ public class JdbcTemplateTest {
 
     @Test
     public void queryAuthorUsernamesTest() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bean1.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("jdbctemplate.xml");
         AuthorDao bean = context.getBean("authorDaoImpl", AuthorDao.class);
         System.out.println(bean.selectAuthorUsernames());
         context.close();
@@ -45,7 +45,7 @@ public class JdbcTemplateTest {
 
     @Test
     public void queryCountTest() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bean1.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("jdbctemplate.xml");
         AuthorDao bean = context.getBean("authorDaoImpl", AuthorDao.class);
         System.out.println(bean.selectCount());
         context.close();
@@ -53,7 +53,7 @@ public class JdbcTemplateTest {
 
     @Test
     public void selectAuthorsTest() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bean1.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("jdbctemplate.xml");
         AuthorDao bean = context.getBean("authorDaoImpl", AuthorDao.class);
         System.out.println(bean.selecAuthors());
         context.close();
@@ -61,7 +61,7 @@ public class JdbcTemplateTest {
 
     @Test
     public void insertBatchAuthorsTest() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("bean1.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("jdbctemplate.xml");
         AuthorDao bean = context.getBean("authorDaoImpl", AuthorDao.class);
         List<Object[]> authors = new ArrayList<Object[]>();
         Object[] author1 = new Object[]{"动漫高手","yyds","acgking@163.com","cpp,golang"};
