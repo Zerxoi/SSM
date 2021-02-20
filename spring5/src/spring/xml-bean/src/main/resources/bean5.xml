@@ -14,10 +14,10 @@
 
     <bean id="iterable" class="xyz.zerxoi.pojo.MyIterable">
         <property name="array">
-            <array>
+            <list>
                 <ref bean="accouting" />
                 <ref bean="sales" />
-            </array>
+            </list>
         </property>
         <property name="list" ref="deptList"></property>
         <property name="map">

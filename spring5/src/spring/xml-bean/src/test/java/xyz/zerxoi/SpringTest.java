@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import xyz.zerxoi.pojo.Book;
 import xyz.zerxoi.pojo.Dept;

@@ -18,10 +18,22 @@
     <servlet.version>4.0.1</servlet.version>
     <jsp.version>2.3.3</jsp.version>
     <el.version>3.0.0</el.version>
+    <jackson.version>2.12.1</jackson.version>
+    <commons.version>1.4</commons.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>${commons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.apache.taglibs</groupId>
         <artifactId>taglibs-standard-spec</artifactId>

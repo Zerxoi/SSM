@@ -10,14 +10,45 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!-- 扫描组件，将加上 @Controller 注解的类作为 Spring MVC 的控制层 -->
-    <context:component-scan base-package="xyz.zerxoi.controller, xyz.zerxoi.service, xyz.zerxoi.dao"></context:component-scan>
+    <context:component-scan base-package="xyz.zerxoi" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+    </context:component-scan>
 
     <!-- 配置视图解析器，视图解析器会根据 prefix + 视图名称（请求映射方法的返回值） + suffix 确定要跳转的页面 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.NullPointerException">nullPointer</prop>
+            </props>
+        </property>
+        <property name="statusCodes">
+            <map>
+                <entry key="nullPointer" value="500"></entry>
+            </map>
+        </property>
+    </bean>
 
     <mvc:default-servlet-handler />
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven />
+
+    <mvc:interceptors>
+        <!-- 1. 默认拦截所有请求 -->
+        <bean class="xyz.zerxoi.interceptor.FirstInterceptor" ></bean>
+        <bean class="xyz.zerxoi.interceptor.SecondInterceptor"></bean>
+        <!-- 要求拦截器类上添加注解 @Component 创建 Bean 对象 -->
+        <!-- <ref bean="firstInterceptor" /> -->
+
+        <!-- <mvc:interceptor>
+            <mvc:mapping path="" />
+            <mvc:exclude-mapping path="" />
+            <bean></bean>
+        </mvc:interceptor> -->
+    </mvc:interceptors>
 </beans>

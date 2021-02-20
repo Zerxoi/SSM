@@ -5,7 +5,7 @@
     <!-- 多个包使用逗号 (,) 隔开 -->
     <context:component-scan base-package="xyz.zerxoi"></context:component-scan>
 
-    <!-- 不适用默认过滤器 -->
+    <!-- 不使用默认过滤器 -->
     <!-- 使用自定义的过滤器，该过滤器只会扫描带有 @Service 注解的类  -->
     <!-- <context:component-scan base-package="xyz.zerxoi" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
